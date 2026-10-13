@@ -213,7 +213,12 @@ canvas { display: block; width: 100%; height: 100%; }
   .canvas-wrap { flex: 1; height: auto; min-height: 160px; }
   .meter { flex: none; margin-top: 10px; }
   .commentary { flex: none; height: 62px; min-height: 0; margin-top: 10px; overflow: hidden; }
-  .anatomy-card { flex: none; height: 232px; overflow: auto; margin-top: 10px; padding: 10px 14px; }
+  /* Below the panel header: chart gets 60% of the height, anatomy card 40%. */
+  .chart-panel { display: grid; grid-template-rows: auto minmax(0, 3fr) minmax(0, 2fr); row-gap: 10px; }
+  .chart-panel .panel-head { margin-bottom: 0; }
+  #chartWrap { min-height: 0; }
+  .anatomy-card { min-height: 0; overflow: auto; margin-top: 0; padding: 10px 14px; container-type: size; }
+  .anat svg { height: clamp(110px, calc(100cqh - 34px), 220px); }
   .anatomy-card h3 { margin-bottom: 4px; }
   .anatomy-card .story { margin: 3px 0 6px; }
   .stats div { padding: 3px 8px; }
@@ -226,6 +231,17 @@ canvas { display: block; width: 100%; height: 100%; }
   .stats span { flex: none; width: 104px; }
   .stats em { flex: 1; min-width: 0; }
 }
+/* When the 40% anatomy card gets short, switch to a compact layout so it still fits. */
+@container (max-height: 210px) {
+  .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .stats div { display: block; padding: 2px 8px; }
+  .stats span { width: auto; font-size: 11px; }
+  .stats b { font-size: 13px; }
+  .stats em { display: none; }
+  .anatomy-card .story { font-size: 11.5px; line-height: 1.32; margin: 2px 0 5px; }
+  .pattern-name { font-size: 14px; }
+  .anatomy-card h3 { font-size: 13px; margin-bottom: 2px; }
+}
 /* Short screens: drop the tagline and squeeze the fixed-height parts. */
 @media (min-width: 981px) and (max-height: 760px) {
   .brand p { display: none; }
@@ -233,8 +249,6 @@ canvas { display: block; width: 100%; height: 100%; }
   .scoreboard { margin-bottom: 8px; }
   .team .role { display: none; }
   .commentary { height: 54px; padding: 8px 12px; font-size: 13px; }
-  .anatomy-card { height: 222px; }
-  .anat svg { height: 162px; }
 }
 @media (max-width: 980px) {
   .grid { grid-template-columns: minmax(0, 1fr); }
