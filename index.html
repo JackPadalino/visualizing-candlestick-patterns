@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bulls vs Bears</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1><span class="t-bull">Bulls</span> <span class="vs">vs</span> <span class="t-bear">Bears</span></h1>
+      <p>Watch buyers and sellers fight over price, and see how each round becomes a candlestick.</p>
+    </div>
+    <div class="controls">
+      <label class="ctl">
+        <span>Round length <output id="lenOut">10s</output></span>
+        <input type="range" id="lenInput" min="5" max="30" step="1" value="10">
+      </label>
+      <label class="ctl">
+        <span>Rounds <output id="roundsOut">5</output></span>
+        <input type="range" id="roundsInput" min="1" max="10" step="1" value="5">
+      </label>
+      <button id="playBtn" class="btn primary">Play!</button>
+      <button id="resetBtn" class="btn">Reset</button>
+    </div>
+  </header>
+
+  <div class="scoreboard">
+    <div class="team bulls">
+      <span id="bullsScore" class="score">0</span>
+      <div><div class="name">BULLS</div><div class="role">Buyers · push price up</div></div>
+    </div>
+    <div class="clock">
+      <div id="roundLabel" class="round">Round 0 / 5</div>
+      <div id="clockLabel" class="time">0:10</div>
+      <div id="priceLabel" class="price">$100.00</div>
+    </div>
+    <div class="team bears">
+      <div><div class="name">BEARS</div><div class="role">Sellers · push price down</div></div>
+      <span id="bearsScore" class="score">0</span>
+    </div>
+  </div>
+
+  <main class="grid">
+    <section class="panel">
+      <div class="panel-head">
+        <h2>The Field</h2>
+        <span class="hint">Where the ball is = the price · Bulls push up, Bears push down</span>
+      </div>
+      <div class="canvas-wrap" id="fieldWrap"><canvas id="field"></canvas></div>
+      <div class="meter" aria-label="Pressure meter">
+        <span class="m-bear">Selling pressure</span>
+        <div class="meter-track"><div id="meterFill" class="meter-fill"></div><div class="meter-mid"></div></div>
+        <span class="m-bull">Buying pressure</span>
+      </div>
+      <p id="commentary" class="commentary">Press <b>Play!</b> to kick off.</p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>The Chart</h2>
+        <span class="hint">One candle per round · hover a candle to inspect it</span>
+      </div>
+      <div class="canvas-wrap" id="chartWrap">
+        <canvas id="chart"></canvas>
+        <div id="tooltip" class="tooltip" hidden></div>
+      </div>
+      <div class="card anatomy-card" id="anatomy"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
